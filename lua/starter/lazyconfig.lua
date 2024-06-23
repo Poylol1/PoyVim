@@ -1,11 +1,5 @@
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then
-  local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
-  vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
-end ---@diagnostic disable-next-line: undefined-field
-vim.opt.rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
 --
@@ -17,17 +11,26 @@ vim.opt.rtp:prepend(lazypath)
 --  To update plugins you can run
 --    :Lazy update
 --
+
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+  local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
+  vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
+end ---@diagnostic disable-next-line: undefined-field
+vim.opt.rtp:prepend(lazypath)
+
 MasonLSP = require 'plugins.LSPmanager.masonI'
 
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
-
+  { 'ThePrimeagen/vim-be-good' },
   { 'numToStr/Comment.nvim', opts = {} },
   { 'akinsho/bufferline.nvim', version = '*', dependencies = 'nvim-tree/nvim-web-devicons' },
-
+  { 'rcarriga/nvim-notify', opts = { background_colour = '#000000' } },
   -- Installs harpoonI
   require 'plugins.harpoonI',
   require 'plugins.oilPl.oilI',
+  require 'plugins.noicePl.noiceI',
   -- makes the bg transparent for console bg to exist
   { 'xiyaowong/transparent.nvim', opts = {} },
   -- Here is a more advanced example where we pass configuration

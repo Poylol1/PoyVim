@@ -1,6 +1,6 @@
 local M = {}
 -- ensured installed LSP servers
-M['mason'] = { 'csharp_ls', 'pyright' }
+M['mason'] = { 'csharp_ls', 'pyright', 'tsserver', 'gopls' }
 
 -- Formatters by ft
 M['autoformat'] = {
@@ -9,6 +9,7 @@ M['autoformat'] = {
   python = { 'isort', 'black' },
   --
   -- You can use a sub-list to tell conform to run *until* a formatter
+  go = { 'gopls' },
   -- is found.
   csharp = { 'csharpier' },
   javascript = { { 'prettierd', 'prettier' } },
@@ -16,7 +17,7 @@ M['autoformat'] = {
 
 M['servers'] = {
   -- clangd = {},
-  -- gopls = {},
+  gopls = {},
   csharp_ls = {},
   pyright = {},
   -- rust_analyzer = {},
@@ -50,7 +51,6 @@ M['serverFunction'] = function()
   require('lspconfig').csharp_ls.setup {}
 end
 
--- { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'python', 'toml', 'c#' }
 M['treesitter_installed'] = 'all'
 
 M['treesitter_indent'] = { enable = true, disable = { 'ruby' } }
