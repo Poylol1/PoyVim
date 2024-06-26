@@ -28,9 +28,10 @@ require('lazy').setup({
   { 'akinsho/bufferline.nvim', version = '*', dependencies = 'nvim-tree/nvim-web-devicons' },
   { 'rcarriga/nvim-notify', opts = { background_colour = '#000000' } },
   -- Installs harpoonI
+  require 'plugins.lualineI',
   require 'plugins.harpoonI',
   require 'plugins.oilPl.oilI',
-  require 'plugins.noicePl.noiceI',
+  require 'plugins.noiceI',
   -- makes the bg transparent for console bg to exist
   { 'xiyaowong/transparent.nvim', opts = {} },
   -- Here is a more advanced example where we pass configuration
@@ -111,10 +112,6 @@ require('lazy').setup({
   require 'plugins.LSPmanager.treesitterI',
 
   --Colortheme config
-  {
-    'folke/tokyonight.nvim',
-    priority = 999,
-  },
   {
     'catppuccin/nvim',
     name = 'catppuccin',

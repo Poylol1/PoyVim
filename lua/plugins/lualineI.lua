@@ -25,7 +25,19 @@ return {
       lualine_b = { 'branch', 'diff', 'diagnostics' },
       lualine_c = { 'filename' },
       lualine_x = { 'encoding', 'fileformat', 'filetype' },
-      lualine_y = { 'progress' },
+      lualine_y = {
+        {
+          'macro-recording',
+          fmt = function()
+            local recording_register = vim.fn.reg_recording()
+            if recording_register == '' then
+              return ''
+            else
+              return 'Recording @' .. recording_register
+            end
+          end,
+        },
+      },
       lualine_z = { 'location' },
     },
     inactive_sections = {

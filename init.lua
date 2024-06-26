@@ -11,6 +11,5 @@ require 'starter.lazyconfig'
 
 require 'plugins.oilPl.oilSetup'
 
-require 'plugins.noicePl.noiceSetup'
-
 require 'plugins.LSPmanager.LSsetup'
+
