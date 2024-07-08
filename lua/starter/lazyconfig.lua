@@ -27,6 +27,7 @@ require('lazy').setup({
   { 'numToStr/Comment.nvim', opts = {} },
   { 'akinsho/bufferline.nvim', version = '*', dependencies = 'nvim-tree/nvim-web-devicons' },
   { 'rcarriga/nvim-notify', opts = { background_colour = '#000000' } },
+  { 'dstein64/vim-startuptime' },
   -- Installs harpoonI
   require 'plugins.lualineI',
   require 'plugins.harpoonI',
