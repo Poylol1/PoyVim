@@ -1,13 +1,10 @@
 local M = {}
 -- ensured installed LSP servers
-M['mason'] = { 'csharp_ls', 'pyright', 'tsserver', 'gopls' }
+M['mason'] = { 'omnisharp', 'pyright', 'tsserver', 'gopls' }
 
 -- Formatters by ft
 M['autoformat'] = {
-  lua = { 'stylua' },
-  -- Conform can also run multiple formatters sequentially
-  python = { 'isort', 'black' },
-  --
+  lua = { 'stylua' }, -- Conform can also run multiple formatters sequentially python = { 'isort', 'black' },
   -- You can use a sub-list to tell conform to run *until* a formatter
   go = { 'gopls' },
   -- is found.
@@ -18,7 +15,7 @@ M['autoformat'] = {
 M['servers'] = {
   -- clangd = {},
   gopls = {},
-  csharp_ls = {},
+  omnisharp = {},
   pyright = {},
   -- rust_analyzer = {},
   -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -48,7 +45,7 @@ M['servers'] = {
 }
 
 M['serverFunction'] = function()
-  require('lspconfig').csharp_ls.setup {}
+  require('lspconfig').omnisharp.setup {}
 end
 
 M['treesitter_installed'] = 'all'

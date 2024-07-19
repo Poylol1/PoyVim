@@ -11,5 +11,6 @@ require 'starter.lazyconfig'
 
 require 'plugins.oilPl.oilSetup'
 
-require 'plugins.LSPmanager.LSsetup'
+require 'plugins.bufferlineSetup'
 
+require 'plugins.LSPmanager.LSsetup'
