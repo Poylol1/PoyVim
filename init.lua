@@ -13,4 +13,4 @@ require 'plugins.oilPl.oilSetup'
 
 require 'plugins.bufferlineSetup'
 
-require 'plugins.LSPmanager.LSPsetup'
+require 'LSP.LSPsetup'

@@ -19,7 +19,7 @@ if not vim.loop.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
-MasonLSP = require 'plugins.LSPmanager.masonI'
+MasonLSP = require 'LSP.masonI'
 
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
@@ -104,17 +104,17 @@ require('lazy').setup({
 
   require 'plugins.telescopeI',
 
-  require 'plugins.LSPmanager.lspI',
+  require 'LSP.lspI',
 
-  require 'plugins.LSPmanager.autoformatI',
+  require 'LSP.autoformatI',
 
   { 'L3MON4D3/LuaSnip', run = 'make install_jsregexp' },
 
-  require 'plugins.LSPmanager.autocompleteI',
+  require 'LSP.autocompleteI',
 
-  require 'plugins.LSPmanager.treesitterI',
+  require 'LSP.treesitterI',
 
-  require 'plugins.LSPmanager.vimtexI',
+  require 'LSP.vimtexI',
   --Colortheme config
   {
     'catppuccin/nvim',
