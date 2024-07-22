@@ -1,5 +1,0 @@
-require 'plugins.LSPmanager.masonI'
-require 'plugins.LSPmanager.lspI'
-require 'plugins.LSPmanager.autoformatI'
-require 'plugins.LSPmanager.autocompleteI'
-require 'plugins.LSPmanager.treesitterI'

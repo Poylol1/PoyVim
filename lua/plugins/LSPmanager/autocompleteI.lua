@@ -100,7 +100,13 @@ return { -- Autocompletion
       -- add for autocompletion
       sources = {
         { name = 'nvim_lsp' },
+        { name = 'vim_lsp' },
         { name = 'luasnip' },
+        { name = 'git' },
+        { name = 'latex_symbols' },
+        { name = 'npm' },
+        { name = 'calc' },
+        { name = 'treesitter' },
         { name = 'path' },
       },
     }
