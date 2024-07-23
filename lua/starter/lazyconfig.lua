@@ -23,6 +23,67 @@ MasonLSP = require 'LSP.masonI'
 
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
+  {
+    'nvim-tree/nvim-web-devicons',
+    opts = {
+      -- your personnal icons can go here (to override)
+      -- you can specify color or cterm_color instead of specifying both of them
+      -- DevIcon will be appended to `name`
+      override = {
+        zsh = {
+          icon = '',
+          color = '#428850',
+          cterm_color = '65',
+          name = 'Zsh',
+        },
+      },
+      -- globally enable different highlight colors per icon (default to true)
+      -- if set to false all icons will have the default icon's color
+      color_icons = true,
+      -- globally enable default icons (default to false)
+      -- will get overriden by `get_icons` option
+      default = true,
+      -- globally enable "strict" selection of icons - icon will be looked up in
+      -- different tables, first by filename, and if not found by extension; this
+      -- prevents cases when file doesn't have any extension but still gets some icon
+      -- because its name happened to match some extension (default to false)
+      strict = true,
+      -- same as `override` but specifically for overrides by filename
+      -- takes effect when `strict` is true
+      override_by_filename = {
+        ['.gitignore'] = {
+          icon = '',
+          color = '#f1502f',
+          name = 'Gitignore',
+        },
+      },
+      -- same as `override` but specifically for overrides by extension
+      -- takes effect when `strict` is true
+      override_by_extension = {
+        ['log'] = {
+          icon = '',
+          color = '#81e043',
+          name = 'Log',
+        },
+      },
+      -- same as `override` but specifically for operating system
+      -- takes effect when `strict` is true
+      override_by_operating_system = {
+        ['apple'] = {
+          icon = '',
+          color = '#A2AAAD',
+          cterm_color = '248',
+          name = 'Apple',
+        },
+        ['arch'] = {
+          icon = '󰣇 ',
+          color = '#A2AAAD',
+          cterm_color = '248',
+          name = 'Arch',
+        },
+      },
+    },
+  },
   { 'ThePrimeagen/vim-be-good' },
   { 'numToStr/Comment.nvim', opts = {} },
   { 'akinsho/bufferline.nvim', version = '*', dependencies = 'nvim-tree/nvim-web-devicons' },
@@ -139,7 +200,7 @@ require('lazy').setup({
       --  - yinq - [Y]ank [I]nside [N]ext [']quote
       --  - ci'  - [C]hange [I]nside [']quote
       require('mini.ai').setup { n_lines = 500 }
-
+      require('mini.icons').setup {}
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
       --
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
@@ -165,6 +226,15 @@ require('lazy').setup({
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
+  },
+  {
+    'MeanderingProgrammer/markdown.nvim',
+    main = 'render-markdown',
+    opts = {},
+    name = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
+    --dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
   },
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
