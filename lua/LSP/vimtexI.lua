@@ -52,14 +52,22 @@ return {
     vim.api.nvim_create_augroup('TexKeymaps', { clear = true })
     -- sets the special keymaps
     vim.api.nvim_create_autocmd('FileType', { pattern = 'tex', callback = vimtex_keymaps, group = 'TexKeymaps' })
+
+    --vim.api.nvim_create_autocmd('FileType', {
+    --  pattern = 'tex',
+    --  callback = function()
+    --    vim.cmd 'TSBufDisable'
+    --  end,
+    --  group = 'TexKeymaps',
+    --})
     -- compiles when open
-    vim.api.nvim_create_autocmd('VimEnter', {
-      callback = function()
-        if vim.api.nvim_buf_get_name(0):match '%.tex$' then
-          vim.cmd 'VimtexCompile'
-        end
-      end,
-    })
+    --vim.api.nvim_create_autocmd('VimEnter', {
+    --  callback = function()
+    --    if vim.api.nvim_buf_get_name(0):match '%.tex$' then
+    --      vim.cmd 'VimtexCompile'
+    --   end
+    --  end,
+    --})
     -- closes stuff
     vim.api.nvim_create_autocmd({ 'BufLeave', 'VimLeave' }, {
       callback = function()
