@@ -109,7 +109,6 @@ return {
     vim.api.nvim_create_augroup('TexKeymaps', { clear = true })
     -- sets the special keymaps
     vim.api.nvim_create_autocmd('FileType', { pattern = 'tex', callback = vimtex_keymaps, group = 'TexKeymaps' })
-<<<<<<< HEAD
 
     --vim.api.nvim_create_autocmd('FileType', {
     --  pattern = 'tex',
@@ -124,14 +123,12 @@ return {
     --    if vim.api.nvim_buf_get_name(0):match '%.tex$' then
     --      vim.cmd 'VimtexCompile'
     --   end
-=======
     --opens stuff
     --vim.api.nvim_create_autocmd('BufEnter', {
     --  callback = function()
     --    if vim.api.nvim_buf_get_name(Current):match '%.tex$' then
     --      vim.cmd 'VimtexCompile'
     --    end
->>>>>>> 024374e (New Commit!!)
     --  end,
     --})
     -- closes stuff
