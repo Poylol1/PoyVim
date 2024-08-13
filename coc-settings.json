@@ -1,0 +1,10 @@
+{
+	"languageserver": {
+		"lua": {
+			"command": "lua-lsp",
+			"filetypes": [
+				"lua"
+			]
+		}
+	}
+}
