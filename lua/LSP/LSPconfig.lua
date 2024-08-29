@@ -1,7 +1,10 @@
 local M = {}
 -- ensured installed LSP servers
+-- ../LSP/masonI.lua
 M['mason'] = { 'omnisharp', 'pyright', 'tsserver', 'gopls' }
 
+-- ../LSP/autoformatI.lua
+M['disable filetypes'] = { c = true, cpp = true }
 -- Formatters by ft
 M['autoformat'] = {
   lua = { 'stylua' }, -- Conform can also run multiple formatters sequentially python = { 'isort', 'black' },
@@ -12,6 +15,7 @@ M['autoformat'] = {
   javascript = { { 'prettierd', 'prettier' } },
 }
 
+-- ../LSP/masonI.lua
 M['servers'] = {
   -- clangd = {},
   gopls = {},
@@ -44,17 +48,21 @@ M['servers'] = {
   },
 }
 
+--
 M['serverFunction'] = function()
   require('lspconfig').omnisharp.setup {}
 end
 
+-- ../LSP/treesitterI.lua
 M['treesitter_installed'] = 'all'
 
-M['treesitter_indent'] = { enable = true, disable = { 'ruby', 'latex' } }
+-- ../LSP/treesitterI.lua
+M['treesitter_indent'] = { enable = true, disable = { 'ruby', 'latex', 'gdscript' } }
 
+-- ../LSP/treesitterI.lua
 M['treesitter_highlight'] = {
   enable = true,
-  disable = 'latex',
+  disable = { 'tex', 'latex' },
   -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
   --  If you are experiencing weird indenting issues, add the language to
   --  the list of additional_vim_regex_highlighting and disabled languages for indent.

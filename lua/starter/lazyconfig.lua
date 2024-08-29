@@ -23,6 +23,8 @@ MasonLSP = require 'LSP.masonI'
 
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
+
+  { 'folke/tokyonight.nvim' },
   {
     'nvim-tree/nvim-web-devicons',
     opts = {
@@ -90,6 +92,7 @@ require('lazy').setup({
   { 'rcarriga/nvim-notify', opts = { background_colour = '#000000' } },
   { 'dstein64/vim-startuptime' },
   -- Installs harpoonI
+  require 'plugins.alphaI',
   require 'plugins.lualineI',
   require 'plugins.harpoonI',
   require 'plugins.oilPl.oilI',
@@ -171,19 +174,42 @@ require('lazy').setup({
   --
   --require 'LSP.cocI',
 
-  {
-    'L3MON4D3/LuaSnip',
-    -- follow latest release.
-    version = 'v2.*', -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-    -- install jsregexp (optional!).
-    build = 'make install_jsregexp',
-  },
-
   require 'LSP.autocompleteI',
 
   require 'LSP.treesitterI',
 
   require 'LSP.vimtexI',
+
+  --{ 'habamax/vim-godot', event = { 'VimEnter', pattern = '.gd' } },
+  {
+    'OXY2DEV/markview.nvim',
+    lazy = false, -- Recommended
+    -- ft = "markdown" -- If you decide to lazy-load anyway
+
+    opts = {
+      modes = { 'n', 'no', 'c', 'i' }, -- Change these modes
+      -- to what you need
+
+      hybrid_modes = { 'n', 'i' }, -- Uses this feature on
+      -- normal mode
+
+      -- This is nice to have
+      callbacks = {
+        on_enable = function(_, win)
+          vim.wo[win].conceallevel = 2
+          vim.wo[win].concealcursor = 'c'
+        end,
+      },
+    },
+    dependencies = {
+      -- You will not need this if you installed the
+      -- parsers manually
+      -- Or if the parsers are in your $RUNTIMEPATH
+      'nvim-treesitter/nvim-treesitter',
+
+      'nvim-tree/nvim-web-devicons',
+    },
+  },
   --Colortheme config
   {
     'catppuccin/nvim',
@@ -196,8 +222,18 @@ require('lazy').setup({
   },
 
   -- Highlight todo, notes, etc in comments
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' } },
 
+  {
+    'kylechui/nvim-surround',
+    version = '*', -- Use for stability; omit to use `main` branch for the latest features
+    event = 'VeryLazy',
+    config = function()
+      require('nvim-surround').setup {
+        -- Configuration here, or leave empty to use defaults
+      }
+    end,
+  },
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
@@ -208,7 +244,7 @@ require('lazy').setup({
       --  - yinq - [Y]ank [I]nside [N]ext [']quote
       --  - ci'  - [C]hange [I]nside [']quote
       require('mini.ai').setup { n_lines = 500 }
-      --require('mini.icons').setup {}
+      require('mini.icons').setup {}
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
       --
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
@@ -216,34 +252,33 @@ require('lazy').setup({
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
 
-      -- Simple and easy statusline.
-      --  You could remove this setup call if you don't like it,
-      --  and try some other statusline plugin
-      local statusline = require 'mini.statusline'
-      -- set use_icons to true if you have a Nerd Font
-      statusline.setup { use_icons = vim.g.have_nerd_font }
+      require('mini.ai').setup()
+      require('mini.operators').setup()
+      require('mini.pairs').setup()
+      require('mini.bracketed').setup()
 
       -- You can configure sections in the statusline by overriding their
       -- default behavior. For example, here we set the section for
       -- cursor location to LINE:COLUMN
-      ---@diagnostic disable-next-line: duplicate-set-field
-      statusline.section_location = function()
-        return '%2l:%-2v'
-      end
+      -- ---@diagnostic disable-next-line: duplicate-set-field
+      -- statusline.section_location = function()
+      --   return '%2l:%-2v'
+      -- end
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
-  {
-    'MeanderingProgrammer/markdown.nvim',
-    main = 'render-markdown',
-    opts = {},
-    name = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
-    --dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
-    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
-    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
-  },
+  { 'echasnovski/mini.surround', version = false },
+  -- {
+  --   'MeanderingProgrammer/markdown.nvim',
+  --   main = 'render-markdown',
+  --   opts = {},
+  --   name = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
+  --   --dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+  --   -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+  --   dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+  -- },
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
   -- place them in the correct locations.

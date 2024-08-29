@@ -106,6 +106,7 @@ return { -- Autocompletion
         { name = 'latex_symbols' },
         { name = 'npm' },
         { name = 'calc' },
+        { name = 'buffer' },
         { name = 'treesitter' },
         { name = 'path' },
       },

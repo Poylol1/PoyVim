@@ -14,3 +14,9 @@ require 'plugins.oilPl.oilSetup'
 require 'plugins.bufferlineSetup'
 
 require 'LSP.LSPsetup'
+
+-- Snippets
+require('luasnip.loaders.from_lua').load { paths = { '~/.config/nvim/lua/LSP/Snippets/all.lua' } }
+
+--Godot
+require 'LSP.godotConfig'
