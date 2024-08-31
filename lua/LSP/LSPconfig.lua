@@ -69,4 +69,40 @@ M['treesitter_highlight'] = {
   additional_vim_regex_highlighting = { 'ruby' },
 }
 
+M['new_filetypes'] = function()
+  vim.filetype.add {
+    pattern = { ['.*/hypr/.*%.conf'] = 'hyprlang' },
+  }
+end
+
+M['sources_by_language'] = {
+  general = {
+    { name = 'luasnip' },
+    { name = 'nvim_lsp' },
+    { name = 'vim_lsp' },
+    { name = 'git' },
+    { name = 'vimtex' },
+    { name = 'npm' },
+    { name = 'calc' },
+    { name = 'buffer' },
+    { name = 'treesitter' },
+    { name = 'path' },
+  },
+  markdown = {
+    { name = 'latex_symbols' },
+  },
+  tex = {
+    { name = 'vimtex' },
+  },
+}
+
+M['autocomplete_extra_dependencies'] = {
+  'kdheepak/cmp-latex-symbols',
+  'hrsh7th/cmp-buffer',
+  'saadparwaiz1/cmp_luasnip',
+  'hrsh7th/cmp-nvim-lsp',
+  'hrsh7th/cmp-path',
+  'micangl/cmp-vimtex',
+}
+
 return M

@@ -53,6 +53,7 @@ return {
         io.close(f)
         return true
       else
+        io.close(f)
         return false
       end
     end
@@ -210,6 +211,7 @@ return {
 
         new_subfile:write('\\documentclass[ ' .. relative_layers .. Getfilename(BufferName) .. ' ]{subfiles} \n')
         new_subfile:write '\\begin{document} \n \\end{document}'
+        new_subfile:close()
       end
 
       for i = 1, #main_file_lines, 1 do

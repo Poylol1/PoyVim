@@ -1,10 +1,21 @@
+CONFIG = require 'LSP.LSPconfig'
+SOURCES = CONFIG['sources_by_language']
+GENERAL = SOURCES.general
+
+function Concat(table_1, table_2)
+  local table_3 = table_1
+  for i = 1, #table_2, 1 do
+    table_3[#table_3 + 1] = table_2[i]
+  end
+  return table_3
+end
 return { -- Autocompletion
   'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
   dependencies = {
     -- Snippet Engine & its associated nvim-cmp source
     {
-      'hrsh7th/cmp-buffer',
+
       'L3MON4D3/LuaSnip',
       build = (function()
         -- Build Step is needed for regex support in snippets.
@@ -26,10 +37,8 @@ return { -- Autocompletion
           end,
         },
       },
+      unpack(CONFIG['autocomplete_extra_dependencies']),
     },
-    'saadparwaiz1/cmp_luasnip',
-    'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-path',
   },
   config = function()
     -- See `:help cmp`
@@ -98,19 +107,15 @@ return { -- Autocompletion
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
       },
       -- add for autocompletion
-      sources = {
-        { name = 'nvim_lsp' },
-        { name = 'vim_lsp' },
-        { name = 'luasnip' },
-        { name = 'git' },
-        { name = 'latex_symbols' },
-        { name = 'npm' },
-        { name = 'calc' },
-        { name = 'buffer' },
-        { name = 'treesitter' },
-        { name = 'path' },
-      },
+      sources = cmp.config.sources(GENERAL),
     }
+    for language, sources in pairs(SOURCES) do
+      if not language == 'general' then
+        cmp.setup.filetype(language, {
+          sources = cmp.config.sources(Concat(GENERAL, SOURCES[sources])),
+        })
+      end
+    end
     -- Setup lspconfig for nvim-cmp
     local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
     require('lspconfig')['csharp_ls'].setup {
