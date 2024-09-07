@@ -1,7 +1,5 @@
 -- [[ Install `lazy.nvim` plugin manager ]]
---    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
-
--- [[ Configure and install plugins ]]
+--    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info [[ Configure and install plugins ]]
 --
 --  To check the current status of your plugins, run
 --    :Lazy
@@ -236,6 +234,7 @@ require('lazy').setup({
       'nvim-tree/nvim-web-devicons',
     },
   },
+
   --Colortheme config
   {
     'catppuccin/nvim',

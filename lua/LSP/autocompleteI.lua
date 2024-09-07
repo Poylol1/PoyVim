@@ -1,8 +1,11 @@
 CONFIG = require 'LSP.LSPconfig'
 SOURCES = CONFIG['sources_by_language']
-GENERAL = SOURCES.general
+GENERAL = SOURCES['general']
 
 function Concat(table_1, table_2)
+  if table_2 == nil then
+    error 'this too?'
+  end
   local table_3 = table_1
   for i = 1, #table_2, 1 do
     table_3[#table_3 + 1] = table_2[i]
@@ -26,17 +29,23 @@ return { -- Autocompletion
         end
         return 'make install_jsregexp'
       end)(),
-      dependencies = {
-        -- `friendly-snippets` contains a variety of premade snippets.
-        --    See the README about individual language/framework/plugin snippets:
-        --    https://github.com/rafamadriz/friendly-snippets
-        {
-          'rafamadriz/friendly-snippets',
-          config = function()
-            require('luasnip.loaders.from_vscode').lazy_load()
-          end,
-        },
-      },
+      init = function()
+        -- Snippets
+        require('luasnip.loaders.from_lua').load {
+          paths = { '~/.config/nvim/lua/LSP/Snippets' },
+        }
+      end,
+      -- dependencies = {
+      --   -- `friendly-snippets` contains a variety of premade snippets.
+      --   --    See the README about individual language/framework/plugin snippets:
+      --   --    https://github.com/rafamadriz/friendly-snippets
+      --   {
+      --     'rafamadriz/friendly-snippets',
+      --     config = function()
+      --       require('luasnip.loaders.from_vscode').lazy_load()
+      --     end,
+      --   },
+      -- },
       unpack(CONFIG['autocomplete_extra_dependencies']),
     },
   },
@@ -109,13 +118,20 @@ return { -- Autocompletion
       -- add for autocompletion
       sources = cmp.config.sources(GENERAL),
     }
-    for language, sources in pairs(SOURCES) do
-      if not language == 'general' then
-        cmp.setup.filetype(language, {
-          sources = cmp.config.sources(Concat(GENERAL, SOURCES[sources])),
-        })
+    local function checkPairs(language, sources)
+      if language == 'general' then
+        return
       end
+      cmp.setup.filetype(language, {
+        sources = cmp.config.sources(Concat(GENERAL, sources)),
+      })
     end
+
+    for language, sources in pairs(SOURCES) do
+      checkPairs(language, sources)
+    end
+    --comment here
+
     -- Setup lspconfig for nvim-cmp
     local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
     require('lspconfig')['csharp_ls'].setup {

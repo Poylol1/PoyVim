@@ -26,11 +26,4 @@ local t = ls.text_node
 -- local ms = ls.multi_snippet
 -- local k = require('luasnip.nodes.key_indexer').new_key
 
-ls.add_snippets('all', {
-  s(
-    { trig = 'hellow' }, -- Table of snippet parameters
-    { -- Table of snippet nodes
-      t 'Hello, world!',
-    }
-  ),
-})
+ls.add_snippets('all', s('hello', { t ' Hello World' }))

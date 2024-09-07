@@ -12,8 +12,9 @@ M['autoformat'] = {
   go = { 'gopls' },
   -- is found.
   csharp = { 'csharpier' },
-  javascript = { { 'prettierd', 'prettier' } },
+  javascript = { 'prettierd', 'prettier', stop_after_first = true },
 }
+-- Mason -------------------------------------------
 
 -- ../LSP/masonI.lua
 M['servers'] = {
@@ -53,6 +54,7 @@ M['serverFunction'] = function()
   require('lspconfig').omnisharp.setup {}
 end
 
+-- treesitterI -------------------------------------
 -- ../LSP/treesitterI.lua
 M['treesitter_installed'] = 'all'
 
@@ -75,27 +77,30 @@ M['new_filetypes'] = function()
   }
 end
 
-M['sources_by_language'] = {
-  general = {
-    { name = 'luasnip' },
-    { name = 'nvim_lsp' },
-    { name = 'vim_lsp' },
-    { name = 'git' },
-    { name = 'vimtex' },
-    { name = 'npm' },
-    { name = 'calc' },
-    { name = 'buffer' },
-    { name = 'treesitter' },
-    { name = 'path' },
-  },
-  markdown = {
-    { name = 'latex_symbols' },
-  },
-  tex = {
-    { name = 'vimtex' },
-  },
+--autocomplete-----------------------------------------
+-- ./autocompleteI.lua
+S = {}
+S['general'] = {
+  { name = 'luasnip' },
+  { name = 'nvim_lsp' },
+  { name = 'vim_lsp' },
+  { name = 'git' },
+  { name = 'npm' },
+  { name = 'calc' },
+  { name = 'buffer' },
+  { name = 'treesitter' },
+  { name = 'path' },
 }
 
+S[{ 'latex', 'tex' }] = { { name = 'vimtex' } }
+
+S['markdown'] = { { name = 'latex_symbols' } }
+
+S['julia'] = { { name = 'latex_symbols' } }
+
+M['sources_by_language'] = S
+
+-- ./autocompleteI.lua
 M['autocomplete_extra_dependencies'] = {
   'kdheepak/cmp-latex-symbols',
   'hrsh7th/cmp-buffer',

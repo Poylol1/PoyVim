@@ -53,7 +53,6 @@ return {
         io.close(f)
         return true
       else
-        io.close(f)
         return false
       end
     end
