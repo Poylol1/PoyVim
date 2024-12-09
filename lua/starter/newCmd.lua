@@ -8,6 +8,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('n', '<TAB>', '<ESC>:bnext<CR>', { noremap = true, silent = true, desc = 'CTRL TAB' })
 vim.keymap.set('n', '<S-TAB>', '<ESC>:bprev<CR>', { noremap = true, silent = true, desc = 'CTRL TAB' })
 
+vim.keymap.set('n', '<C-~>', 'ñ', {})
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.

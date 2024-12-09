@@ -1,7 +1,8 @@
--- @param txt string[]
--- @param opts table?
+--- @param txt string[]
+--- @param highlight string?
+--- @return table
 local function text(txt, highlight)
-  options = { position = 'center', hl = 'Type' }
+  local options = { position = 'center', hl = 'Type' }
   if highlight ~= nil then
     options.hl = highlight
   end
@@ -13,7 +14,7 @@ local function text(txt, highlight)
   }
 end
 
--- @param lines number
+--- @param lines number
 local function padding(lines)
   return { type = 'padding', val = lines }
 end

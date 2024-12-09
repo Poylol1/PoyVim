@@ -3,7 +3,7 @@ c.omnisharp.setup {
   --  root_dir = function()
   --    return vim.fn.getcwd()
   --  end,
-  root_dir = require('lspconfig').util.root_pattern('.sln', '*.csproj', '.git'),
+  root_dir = require('lspconfig').util.root_pattern('*.sln', '*.csproj', '*.git'),
 
   settings = {
     FormattingOptions = {

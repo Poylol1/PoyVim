@@ -1,7 +1,7 @@
 local M = {}
 -- ensured installed LSP servers
 -- ../LSP/masonI.lua
-M['mason'] = { 'omnisharp', 'pyright', 'tsserver', 'gopls' }
+M['mason'] = { 'omnisharp', 'pyright', 'gopls' }
 
 -- ../LSP/autoformatI.lua
 M['disable filetypes'] = { c = true, cpp = true }
@@ -29,8 +29,13 @@ M['servers'] = {
   --    https://github.com/pmizio/typescript-tools.nvim
   --
   -- But for many setups, the LSP (`tsserver`) will work just fine
-  tsserver = {},
   --
+  -- harper_ls = {
+  --   filetypes = {
+  --     'md',
+  --     'tex',
+  --   },
+  -- },
   lua_ls = {
     -- cmd = {...},
     -- filetypes = { ...},
@@ -94,9 +99,9 @@ S['general'] = {
 
 S[{ 'latex', 'tex' }] = { { name = 'vimtex' } }
 
-S['markdown'] = { { name = 'latex_symbols' } }
+--S['markdown'] = { { name = 'latex_symbols' } }
 
-S['julia'] = { { name = 'latex_symbols' } }
+-- S['julia'] = { { name = 'latex_symbols' } }
 
 M['sources_by_language'] = S
 

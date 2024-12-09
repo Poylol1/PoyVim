@@ -44,9 +44,9 @@ return {
     -- simple utils functions
     --#region Utils
 
-    -- Takes a filepath and retuns true if it exist or false it is does not
-    -- @param file string
-    -- @returns bool
+    --- Takes a filepath and retuns true if it exist or false it is does not
+    --- @param file_name string
+    --- @returns bool
     function FileExist(file_name)
       local f = io.open(file_name, 'r')
       if f ~= nil then
@@ -57,12 +57,12 @@ return {
       end
     end
 
-    -- Takes a string and splits it based on a divider
-    -- ex. Split('water.fire','.')
-    -- returns {water,fire}
-    -- @param str string
-    -- @param divider string
-    -- @return table
+    --- Takes a string and splits it based on a divider
+    --- ex. Split('water.fire','.')
+    --- returns {water,fire}
+    --- @param str string
+    --- @param divider string
+    --- @return table
     function Split(str, divider)
       Turner = {}
       Currentstr = ''
@@ -79,20 +79,20 @@ return {
       return Turner
     end
 
-    -- Gets the file name of a path
-    -- based on a file path
-    --
-    -- ex.
-    -- testpath = 'home/user/documents/testDoc.tex'
-    -- Getfilename(testpath)
-    -- returns testDoc.tex
-    --
-    -- to get the other part of the string
-    --
-    -- other_part = testpath:sub{-#Getfilename(testpath)}
-    --
-    -- @param testpat string -- file path
-    -- @return string
+    --- Gets the file name of a path
+    --- based on a file path
+    ---
+    --- ex.
+    --- testpath = 'home/user/documents/testDoc.tex'
+    --- Getfilename(testpath)
+    --- returns testDoc.tex
+    ---
+    --- to get the other part of the string
+    ---
+    --- other_part = testpath:sub{-#Getfilename(testpath)}
+    ---
+    --- @param testpat string file path
+    --- @return string | nil
     function Getfilename(testpat)
       for i = #testpat, 1, -1 do
         if testpat:sub(i, i) == '/' then
@@ -115,10 +115,10 @@ return {
     -- GetStringSide(filepath, Documents, -1)
     -- returns 'home/user/'
     --
-    -- @param str string
-    -- @param objective string
-    -- @param side int -- can be 1 or -1
-    -- @return string
+    --- @param str string
+    --- @param objective string
+    --- @param side integer can be 1 or -1
+    --- @return string
     function GetStringSide(str, objective, side)
       for i = 1, #str - #objective, 1 do
         if str:sub(i, i + #objective - 1) == objective then
@@ -131,7 +131,7 @@ return {
           return str:sub(i)
         end
       end
-      return error 'invalid string'
+      error 'invalid string'
     end
     --#endregion
 
@@ -209,7 +209,7 @@ return {
         end
 
         new_subfile:write('\\documentclass[ ' .. relative_layers .. Getfilename(BufferName) .. ' ]{subfiles} \n')
-        new_subfile:write '\\begin{document} \n \\end{document}'
+        new_subfile:write '\\begin{document} \n\\end{document}'
         new_subfile:close()
       end
 

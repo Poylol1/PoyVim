@@ -2,6 +2,10 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = '\\'
 
+-- IDK how to replace the transparent plugin
+--vim.g.loaded_transparent = 1
+--vim.g.transparent_enabled = true
+
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
