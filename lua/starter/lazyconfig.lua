@@ -211,18 +211,21 @@ require('lazy').setup({
     -- ft = "markdown" -- If you decide to lazy-load anyway
 
     opts = {
-      modes = { 'n', 'no', 'c', 'i' }, -- Change these modes
-      -- to what you need
+      preview = {
+        modes = { 'n', 'no', 'c', 'i' }, -- Change these modes
+        -- to what you need
 
-      hybrid_modes = { 'n', 'i' }, -- Uses this feature on
-      -- normal mode
+        hybrid_modes = { 'n', 'i' }, -- Uses this feature on
+        -- normal mode
+        __inside_code_block = true,
 
-      -- This is nice to have
-      callbacks = {
-        on_enable = function(_, win)
-          vim.wo[win].conceallevel = 2
-          vim.wo[win].concealcursor = 'c'
-        end,
+        -- This is nice to have
+        callbacks = {
+          on_enable = function(_, win)
+            vim.wo[win].conceallevel = 2
+            vim.wo[win].concealcursor = 'c'
+          end,
+        },
       },
     },
     dependencies = {
