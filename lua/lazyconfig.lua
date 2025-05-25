@@ -25,7 +25,6 @@ MasonLSP = require 'LSP.masonI'
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
 
-  { 'folke/tokyonight.nvim' },
   {
     'nvim-tree/nvim-web-devicons',
     opts = {
@@ -72,12 +71,6 @@ require('lazy').setup({
       -- same as `override` but specifically for operating system
       -- takes effect when `strict` is true
       override_by_operating_system = {
-        ['apple'] = {
-          icon = '',
-          color = '#A2AAAD',
-          cterm_color = '248',
-          name = 'Apple',
-        },
         ['arch'] = {
           icon = '󰣇 ',
           color = '#A2AAAD',
@@ -87,16 +80,38 @@ require('lazy').setup({
       },
     },
   },
-  { 'ThePrimeagen/vim-be-good' },
-  { 'numToStr/Comment.nvim', opts = {} },
-  { 'akinsho/bufferline.nvim', version = '*', dependencies = 'nvim-tree/nvim-web-devicons' },
-  { 'rcarriga/nvim-notify', opts = { background_colour = '#000000' } },
+  -- TODO Comment.nvim support
+  {
+    'akinsho/bufferline.nvim',
+    version = '*',
+    dependencies = 'nvim-tree/nvim-web-devicons',
+    options = {
+      buffer_close_icon = '',
+      modified_icon = '●',
+      close_icon = '',
+      close_command = 'Bdelete %d',
+      right_mouse_command = 'Bdelete! %d',
+      left_trunc_marker = '',
+      right_trunc_marker = '',
+      show_tab_indicators = true,
+      show_close_icon = false,
+    },
+  },
+  -- IDK Here { 'rcarriga/nvim-notify', opts = { background_colour = '#000000' } },
   { 'dstein64/vim-startuptime' },
   -- Installs harpoonI
   require 'plugins.alphaI',
   require 'plugins.lualineI',
   require 'plugins.harpoonI',
-  require 'plugins.oilPl.oilI',
+  {
+    'stevearc/oil.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    init = function()
+      vim.keymap.set('n', '<Leader>o', '<CMD>Oil<CR>', { desc = '[O]pen oil file manager' })
+    end,
+  },
   require 'plugins.noiceI',
   -- makes the bg transparent for console bg to exist
   { 'xiyaowong/transparent.nvim', opts = {} },
@@ -113,7 +128,7 @@ require('lazy').setup({
         change = { text = '~' },
         delete = { text = '_' },
         topdelete = { text = '‾' },
-        changedelete = { text = '~' },
+        changedelete = { text = '±' },
       },
     },
   },
@@ -207,8 +222,8 @@ require('lazy').setup({
   --{ 'habamax/vim-godot', event = { 'VimEnter', pattern = '.gd' } },
   {
     'OXY2DEV/markview.nvim',
-    lazy = false, -- Recommended
-    -- ft = "markdown" -- If you decide to lazy-load anyway
+    lazy = true, -- Recommended
+    ft = 'markdown', -- If you decide to lazy-load anyway
 
     opts = {
       preview = {
@@ -297,20 +312,6 @@ require('lazy').setup({
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
-  { 'echasnovski/mini.surround', version = false },
-  -- {
-  --   'MeanderingProgrammer/markdown.nvim',
-  --   main = 'render-markdown',
-  --   opts = {},
-  --   name = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
-  --   --dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
-  --   -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
-  --   dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
-  -- },
-  -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
-  -- init.lua. If you want these files, they are in the repository, so you can just download them and
-  -- place them in the correct locations.
-
   -- NOTE: Next step on your Neovim journey: Add/Configure additional plugins for Kickstart
   --
   --  Here are some example plugins that I've included in the Kickstart repository.
